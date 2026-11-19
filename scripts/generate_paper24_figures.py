@@ -78,7 +78,13 @@ def compute_inflation_and_boltzmann():
     h_end = math.sqrt(rho_end / (3.0 * M_PL_RED ** 2))
 
     gamma_h = (M_INF_GEV ** 3) / (48.0 * math.pi * M_PL_RED ** 2)
-    gamma_g = (((1.0 / 38.0) ** 2) * 49.0 * 8.0 * (M_INF_GEV ** 3)) / (768.0 * (math.pi ** 3) * M_PL_RED ** 2)
+    t_log = math.log(M_INF_GEV / 91.1876)
+    alpha_em_mz, sin2_tw = 1.0 / 127.951, 0.23121
+    inv_ay = (1.0 - sin2_tw) / alpha_em_mz + (-41.0 / 6.0) / (2.0 * math.pi) * t_log
+    inv_a2 = sin2_tw / alpha_em_mz + (19.0 / 6.0) / (2.0 * math.pi) * t_log
+    inv_a3 = (1.0 / 0.1180) + 7.0 / (2.0 * math.pi) * t_log
+    pref_vv = (M_INF_GEV ** 3) / (1536.0 * (math.pi ** 3) * (M_PL_RED ** 2))
+    gamma_g = pref_vv * (1.0 * ((-41.0 / 6.0) ** 2) / (inv_ay ** 2) + 3.0 * ((19.0 / 6.0) ** 2) / (inv_a2 ** 2) + 8.0 * 49.0 / (inv_a3 ** 2))
     gamma_n1 = (M_INF_GEV * (M_1_GEV ** 2)) / (96.0 * math.pi * M_PL_RED ** 2) * (
         (1.0 - 4.0 * (M_1_GEV ** 2) / (M_INF_GEV ** 2)) ** 1.5
     )
@@ -128,8 +134,9 @@ def compute_inflation_and_boltzmann():
         z_ci = th_tau + 1j * eta_cp
         w12 = 0.5 * (M3_NU_GEV - M2_NU_GEV) * math.sin(2.0 * th_tau) - 0.5j * (M3_NU_GEV + M2_NU_GEV) * math.sinh(2.0 * eta_cp)
         w11 = M2_NU_GEV * abs(cmath.cos(z_ci)) ** 2 + M3_NU_GEV * abs(cmath.sin(z_ci)) ** 2
-        eps_1 = abs((1.0 / (8.0 * math.pi)) * ((M_2_GEV / V_HIGGS_GEV ** 2) / w11) * (w12 ** 2).imag * g_loop)
+        eps_1 = (1.0 / (8.0 * math.pi)) * ((M_2_GEV / V_HIGGS_GEV ** 2) / w11) * (w12 ** 2).imag * g_loop
         gamma_d1 = (w11 * (M_1_GEV ** 2)) / (8.0 * math.pi * (V_HIGGS_GEV ** 2))
+        gamma_d1_nt = gamma_d1 * (2.0 * M_1_GEV / M_INF_GEV)
 
         rho_phi_0 = 3.0 * (M_PL_RED ** 2) * (h_end ** 2)
         e_phi_0 = rho_phi_0 / (M_INF_GEV ** 4)
@@ -140,9 +147,9 @@ def compute_inflation_and_boltzmann():
             ep, er, xn1, xbl = float(y[0]), float(y[1]), float(y[2]), float(y[3])
             ep = max(ep, 0.0)
             er = max(er, 1e-120)
+            xn1_p = max(xn1, 0.0)
             rp = ep * math.exp(-3.0 * n_ef) * (M_INF_GEV ** 4)
             rr = er * math.exp(-4.0 * n_ef) * (M_INF_GEV ** 4)
-            h_val = math.sqrt((rp + rr) / (3.0 * M_PL_RED ** 2))
             t_val = (30.0 * rr / (math.pi ** 2 * G_STAR_SM)) ** 0.25
             z_val = M_1_GEV / max(t_val, 1e-30)
             if z_val < 50.0:
@@ -157,18 +164,16 @@ def compute_inflation_and_boltzmann():
                 gam_w_id = 0.0
             gam_w_dl2 = (2.0 / (math.pi ** 3)) * (t_val ** 3) * sum_m2_gev2 / (V_HIGGS_GEV ** 4)
             x_n1_eq = n_n1_eq * math.exp(3.0 * n_ef) / (M_INF_GEV ** 3)
-            gam_d_eff = gamma_d1 * rk
-            e_n1_mean = 0.5 * M_INF_GEV if z_val > 3.0 else math.sqrt(M_1_GEV ** 2 + 9.0 * t_val ** 2)
+            rn1 = 0.5 * M_INF_GEV * max(xn1_p - x_n1_eq, 0.0) * math.exp(-3.0 * n_ef) * (M_INF_GEV ** 3)
+            h_val = math.sqrt((rp + rn1 + rr) / (3.0 * M_PL_RED ** 2))
+            decay_flux = (gamma_d1_nt / h_val) * xn1_p - (gamma_d1 * rk / h_val) * x_n1_eq
             dep = -(gamma_tot / h_val) * ep
-            der = math.exp(n_ef) * (
-                (1.0 - br_n1) * (gamma_tot / h_val) * ep
-                + (gam_d_eff / h_val) * (e_n1_mean / M_INF_GEV) * (xn1 - x_n1_eq)
-            )
-            dxn1 = 2.0 * br_n1 * (gamma_tot / h_val) * ep - (gam_d_eff / h_val) * (xn1 - x_n1_eq)
-            dxbl = eps_1 * (gam_d_eff / h_val) * (xn1 - x_n1_eq) - ((gam_w_id + gam_w_dl2) / h_val) * xbl
+            der = math.exp(n_ef) * ((1.0 - br_n1) * (gamma_tot / h_val) * ep + 0.5 * decay_flux)
+            dxn1 = 2.0 * br_n1 * (gamma_tot / h_val) * ep - decay_flux
+            dxbl = eps_1 * decay_flux - ((gam_w_id + gam_w_dl2) / h_val) * xbl
             return [dep, der, dxn1, dxbl]
 
-        n_max = 25.0
+        n_max = 26.0
         t_eval = np.linspace(dn0, n_max, 400) if dense else None
         sol = solve_ivp(
             rhs, [dn0, n_max],
@@ -193,9 +198,9 @@ def compute_inflation_and_boltzmann():
     for ecp in eta_cp_scan:
         sb = run_boltz(float(ecp), dense=False)
         erf, xblf = float(sb.y[1, -1]), float(sb.y[3, -1])
-        rrf = erf * math.exp(-4.0 * 25.0) * (M_INF_GEV ** 4)
+        rrf = erf * math.exp(-4.0 * 26.0) * (M_INF_GEV ** 4)
         tf = (30.0 * rrf / (math.pi ** 2 * G_STAR_SM)) ** 0.25
-        scf = ((2.0 * math.pi ** 2 / 45.0) * G_STAR_SM * (tf ** 3)) * math.exp(3.0 * 25.0) / (M_INF_GEV ** 3)
+        scf = ((2.0 * math.pi ** 2 / 45.0) * G_STAR_SM * (tf ** 3)) * math.exp(3.0 * 26.0) / (M_INF_GEV ** 3)
         ybl = xblf / scf
         eta_b_scan_28.append(S0_OVER_NGAMMA0 * (28.0 / 79.0) * ybl)
         eta_b_scan_12.append(S0_OVER_NGAMMA0 * (12.0 / 37.0) * ybl)
@@ -398,8 +403,8 @@ def make_figure_2(data: dict, lang: str) -> None:
         ax2.set_xlabel(r"Post-Inflation e-Folds $\Delta N$")
         ax2.set_ylabel(r"Comoving Yield $\eta_B^{\mathrm{comov}}(\Delta N) \times 10^{10}$")
         ax2.annotate(
-            r"Asymptotic Freeze-Out:" + "\n" + r"$\eta_B = 6.104\times 10^{-10}$ ($-0.41\sigma$)",
-            xy=(21.0, 6.104), xytext=(2.2, 4.35),
+            r"Asymptotic Freeze-Out:" + "\n" + r"$\eta_B = +6.106\times 10^{-10}$ ($-0.35\sigma$)",
+            xy=(21.0, 6.106), xytext=(2.2, 4.35),
             arrowprops=dict(arrowstyle="->", color="#DC2626", lw=1.3),
             fontsize=8.8, bbox=dict(boxstyle="round,pad=0.3", fc="#FEF2F2", ec="#DC2626", alpha=0.95)
         )
@@ -408,13 +413,13 @@ def make_figure_2(data: dict, lang: str) -> None:
         ax2.set_xlabel(r"Infláció utáni e-folding $\Delta N$")
         ax2.set_ylabel(r"Együttmozgó hozam $\eta_B^{\mathrm{comov}}(\Delta N) \times 10^{10}$")
         ax2.annotate(
-            r"Aszimptotikus befagyás:" + "\n" + r"$\eta_B = 6,104\times 10^{-10}$ ($-0,41\sigma$)",
-            xy=(21.0, 6.104), xytext=(2.2, 4.35),
+            r"Aszimptotikus befagyás:" + "\n" + r"$\eta_B = +6,106\times 10^{-10}$ ($-0,35\sigma$)",
+            xy=(21.0, 6.106), xytext=(2.2, 4.35),
             arrowprops=dict(arrowstyle="->", color="#DC2626", lw=1.3),
             fontsize=8.8, bbox=dict(boxstyle="round,pad=0.3", fc="#FEF2F2", ec="#DC2626", alpha=0.95)
         )
 
-    ax2.set_xlim(0.0, 25.0)
+    ax2.set_xlim(0.0, 26.0)
     ax2.set_ylim(0.0, 7.2)
     ax2.grid(True, alpha=0.25)
     ax2.legend(loc="lower right", fontsize=8.2)
@@ -434,7 +439,7 @@ def make_figure_2(data: dict, lang: str) -> None:
     ax3.axvline(U_GEN, color="#DC2626", lw=1.8, ls="--", label=(
         r"$K_4$ Generator $u = \sqrt{3}/24 = 0.07217$" if lang == "en" else r"$K_4$ generátor $u = \sqrt{3}/24 = 0,07217$"
     ))
-    ax3.scatter([U_GEN], [6.1035], color="#DC2626", s=85, zorder=6)
+    ax3.scatter([U_GEN], [6.1059], color="#DC2626", s=85, zorder=6)
 
     if lang == "en":
         ax3.set_title(r"C. Chiral Boost $\eta_{\mathrm{CP}}$ Intersection", fontweight="bold")

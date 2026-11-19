@@ -9,7 +9,7 @@ Investigates whether Starobinsky $R^2$ inflation, post-inflationary reheating, m
 ## Key Results
 - **Theorem 2.2 (Minimal 1-Loop $a_2$ No-Go):** Massless Weyl and Yang-Mills fields give zero local $R^2$, and minimal scalars ($\xi=0, N_0\le 210$) fall short of $\beta_{R^2}^{\mathrm{Star}} = 4.839\times 10^8$ by $>3.34\times 10^9$.
 - **Theorem 3.1 ($N=4$ Coleman-Weinberg Supertrace & $\sqrt{3}$ Cancellation):** Under classical UV scale invariance (`BC-UV-CW`), $n_{\mathrm{eff}}^{\mathrm{STr}}(N) = d_A - 2d_S$ equals $-1$ (tachyonic) at $N=3$ and $+2$ ($8-6$) at $N=4$, fixing $M_{\mathrm{inf}}/M_{\mathrm{Pl}} = \frac{5}{12{,}288\pi^3}$ ($M_{\mathrm{inf}} = 3.196\times 10^{13}\;\mathrm{GeV}$, $N_* = 51.41$, $A_s = 2.101\times 10^{-9}$, $n_s = 0.9620$, $r = 0.00426$).
-- **Theorem 4.1 & Exact 4-ODE Boltzmann Closure:** $\mathbf{R}(\theta_\tau + iu) \in \mathrm{SO}(2,\mathbb{C})$ gives $|\varepsilon_1| = 8.470\times 10^{-5}$ and $\eta_B = 6.104\times 10^{-10}$ (`-0.41 sigma` vs. Planck 2018 for $28/79$ sphaleron; $5.585\times 10^{-10}$ for $12/37$ crossover).
+- **Theorem 4.1 & Exact 4-ODE Boltzmann Closure:** $\mathbf{R}(\theta_\tau + iu) \in \mathrm{SO}(2,\mathbb{C})$ gives $|\varepsilon_1| = 8.470\times 10^{-5}$ and $\eta_B = +6.106\times 10^{-10}$ (`-0.35 sigma` vs. Planck 2018 for $28/79$ sphaleron; $5.585\times 10^{-10}$ for $12/37$ crossover).
 
 ## Reproducibility
 ```bash
