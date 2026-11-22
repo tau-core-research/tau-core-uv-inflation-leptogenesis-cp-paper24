@@ -188,7 +188,7 @@ def compute_inflation_and_boltzmann():
     rho_rad_g = np.maximum(sol_b.y[1], 1e-90) * np.exp(-4.0 * n_grid) * (M_INF_GEV ** 4)
     t_grid = (30.0 * rho_rad_g / (math.pi ** 2 * G_STAR_SM)) ** 0.25
     s_comov_final = float(((2.0 * math.pi ** 2 / 45.0) * G_STAR_SM * (t_grid[-1] ** 3)) * math.exp(3.0 * float(n_grid[-1])) / (M_INF_GEV ** 3))
-    # Comoving baryon asymmetry normalized to final post-reheating entropy (smooth monotone build-up 0 -> 6.104e-10):
+    # Comoving baryon asymmetry normalized to final post-reheating entropy (smooth monotone build-up 0 -> 6.106e-10):
     eta_b_traj = S0_OVER_NGAMMA0 * (28.0 / 79.0) * (sol_b.y[3] / s_comov_final)
     y_n1_traj = sol_b.y[2] / s_comov_final
 
@@ -260,23 +260,26 @@ def make_figure_1(data: dict, lang: str) -> None:
             fontsize=9.1, bbox=dict(boxstyle="round,pad=0.3", fc="#ECFDF5", ec="#059669", alpha=0.95)
         )
     else:
+        xs_hu = f"{xs:.2f}".replace(".", "{,}")
+        ns_ef_hu = f"{data['n_star']:.2f}".replace(".", "{,}")
+        xe_hu = f"{xe:.2f}".replace(".", "{,}")
         ax1.set_title("A. Skálainvariáns Plakett Starobinsky-Potenciál ($k_{\\mathrm{added}}=0$)", fontweight="bold")
         ax1.set_xlabel(r"Kanonikus Einstein-keretbeli skalaron $\phi / M_{\mathrm{Pl}}$")
         ax1.set_ylabel(r"Normált potenciál $V(\phi) / (M_{\mathrm{Pl}}^2 M_{\mathrm{inf}}^2)$")
         ax1.annotate(
-            f"CMB pivot ($k_* = 0,05\\;\\mathrm{{Mpc}}^{{-1}}$)\n$\\phi_*/M_{{\\mathrm{{Pl}}}} = {xs:.2f},\\; N_* = {data['n_star']:.2f}$\n$\\sqrt{{R_{{J,*}}}}/M_R = 0,84 < 1$",
+            f"CMB pivot ($k_* = 0{{,}}05\\;\\mathrm{{Mpc}}^{{-1}}$)\n$\\phi_*/M_{{\\mathrm{{Pl}}}} = {xs_hu},\\; N_* = {ns_ef_hu}$\n$\\sqrt{{R_{{J,*}}}}/M_R = 0{{,}}84 < 1$",
             xy=(xs, vs), xytext=(2.85, 0.43),
             arrowprops=dict(arrowstyle="->", color="#DC2626", lw=1.3),
             fontsize=9.3, bbox=dict(boxstyle="round,pad=0.3", fc="#FEF2F2", ec="#DC2626", alpha=0.95)
         )
         ax1.annotate(
-            f"Infláció vége ($\\epsilon_1 = 1$)\n$\\phi_{{\\mathrm{{end}}}}/M_{{\\mathrm{{Pl}}}} = {xe:.2f}$",
+            f"Infláció vége ($\\epsilon_1 = 1$)\n$\\phi_{{\\mathrm{{end}}}}/M_{{\\mathrm{{Pl}}}} = {xe_hu}$",
             xy=(xe, ve), xytext=(1.55, 0.14),
             arrowprops=dict(arrowstyle="->", color="#D97706", lw=1.3),
             fontsize=9.3, bbox=dict(boxstyle="round,pad=0.3", fc="#FFFBEB", ec="#D97706", alpha=0.95)
         )
         ax1.annotate(
-            r"Reheating gödör: $\phi \to HH, gg, N_1 N_1$" + "\n" + r"$M_{\mathrm{inf}} = \frac{5}{12\,288\pi^3}M_{\mathrm{Pl}} = 3,20\times 10^{13}\;\mathrm{GeV}$",
+            r"Reheating gödör: $\phi \to HH, gg, N_1 N_1$" + "\n" + r"$M_{\mathrm{inf}} = \frac{5}{12\,288\pi^3}M_{\mathrm{Pl}} = 3{,}20\times 10^{13}\;\mathrm{GeV}$",
             xy=(0.0, 0.0), xytext=(0.95, 0.84),
             arrowprops=dict(arrowstyle="->", color="#059669", lw=1.3),
             fontsize=9.1, bbox=dict(boxstyle="round,pad=0.3", fc="#ECFDF5", ec="#059669", alpha=0.95)
@@ -306,10 +309,13 @@ def make_figure_1(data: dict, lang: str) -> None:
     ax2.plot(data["ns_curve"], data["r_curve"], color="#1E293B", lw=2.0, ls="-", label=(
         r"$R + R^2/(6M_{\mathrm{inf}}^2)$ Trajectory ($N_* \in [46, 60]$)" if lang == "en" else r"$R + R^2/(6M_{\mathrm{inf}}^2)$ pálya ($N_* \in [46, 60]$)"
     ))
+    nstar_lbl = f"{data['n_star']:.2f}" if lang == "en" else f"{data['n_star']:.2f}".replace(".", "{,}")
+    ns_lbl = f"{data['ns_star']:.4f}" if lang == "en" else f"{data['ns_star']:.4f}".replace(".", "{,}")
+    r_lbl = f"{data['r_star']:.5f}" if lang == "en" else f"{data['r_star']:.5f}".replace(".", "{,}")
     ax2.scatter([data["ns_star"]], [data["r_star"]], color="#DC2626", marker="*", s=230, zorder=6, label=(
-        f"Zero-Parameter Prediction ($N_*={data['n_star']:.2f}$):\n$n_s={data['ns_star']:.4f},\\; r={data['r_star']:.5f}$"
+        f"Zero-Parameter Prediction ($N_*={nstar_lbl}$):\n$n_s={ns_lbl},\\; r={r_lbl}$"
         if lang == "en" else
-        f"Paramétermentes előrejelzés ($N_*={data['n_star']:.2f}$):\n$n_s={data['ns_star']:.4f},\\; r={data['r_star']:.5f}$"
+        f"Paramétermentes előrejelzés ($N_*={nstar_lbl}$):\n$n_s={ns_lbl},\\; r={r_lbl}$"
     ))
 
     if lang == "en":
@@ -318,7 +324,7 @@ def make_figure_1(data: dict, lang: str) -> None:
         ax2.set_ylabel(r"Tensor-to-Scalar Ratio $r$")
     else:
         ax2.set_title("B. Primordiális $(n_s, r)$ Sík és B-Módusú Falszifikációs Kapu", fontweight="bold")
-        ax2.set_xlabel(r"Skalár spektrális index $n_s$ ($k_* = 0,05\;\mathrm{Mpc}^{-1}$)")
+        ax2.set_xlabel(r"Skalár spektrális index $n_s$ ($k_* = 0{,}05\;\mathrm{Mpc}^{-1}$)")
         ax2.set_ylabel(r"Tenzor–skalár arány $r$")
 
     ax2.set_xlim(0.953, 0.977)
@@ -369,9 +375,9 @@ def make_figure_2(data: dict, lang: str) -> None:
         ax1.set_xlabel(r"Infláció utáni e-folding $\Delta N = \ln(a / a_{\mathrm{end}})$")
         ax1.set_ylabel(r"Energiasűrűség $\log_{10}(\rho / \mathrm{GeV}^4)$")
         ax1_t.set_ylabel(r"Plazma-hőmérséklet $\log_{10}(T / \mathrm{GeV})$", color="#059669")
-        ax1_t.text(10.8, math.log10(M_1_GEV) + 0.14, r"$M_1 = 5,70\times 10^{12}\;\mathrm{GeV}$", color="#7C3AED", fontsize=8.5)
+        ax1_t.text(10.8, math.log10(M_1_GEV) + 0.14, r"$M_1 = 5{,}70\times 10^{12}\;\mathrm{GeV}$", color="#7C3AED", fontsize=8.5)
         ax1_t.annotate(
-            r"$T_{\max} = 2,11\times 10^{12}\;\mathrm{GeV}$" + "\n" + r"($M_1/T_{\max} = 2,70$)",
+            r"$T_{\max} = 2{,}11\times 10^{12}\;\mathrm{GeV}$" + "\n" + r"($M_1/T_{\max} = 2{,}70$)",
             xy=(0.55, math.log10(2.111e12)), xytext=(8.5, 11.82),
             arrowprops=dict(arrowstyle="->", color="#059669", lw=1.2),
             color="#065F46", fontsize=8.3,
@@ -394,7 +400,7 @@ def make_figure_2(data: dict, lang: str) -> None:
         r"$\eta_B(\Delta N)$ ($c_{\mathrm{sph}} = 12/37$ crossover)" if lang == "en" else r"$\eta_B(\Delta N)$ ($c_{\mathrm{sph}} = 12/37$ átmenet)"
     ))
     ax2.axhspan(6.08, 6.16, color="#10B981", alpha=0.35, label=(
-        r"Planck 2018: $(6.12 \pm 0.04)\times 10^{-10}$"
+        r"Planck 2018: $(6.12 \pm 0.04)\times 10^{-10}$" if lang == "en" else r"Planck 2018: $(6{,}12 \pm 0{,}04)\times 10^{-10}$"
     ))
     ax2.axhline(6.12, color="#047857", lw=1.2, ls=":")
 
@@ -413,7 +419,7 @@ def make_figure_2(data: dict, lang: str) -> None:
         ax2.set_xlabel(r"Infláció utáni e-folding $\Delta N$")
         ax2.set_ylabel(r"Együttmozgó hozam $\eta_B^{\mathrm{comov}}(\Delta N) \times 10^{10}$")
         ax2.annotate(
-            r"Aszimptotikus befagyás:" + "\n" + r"$\eta_B = +6,106\times 10^{-10}$ ($-0,35\sigma$)",
+            r"Aszimptotikus befagyás:" + "\n" + r"$\eta_B = +6{,}106\times 10^{-10}$ ($-0{,}35\sigma$)",
             xy=(21.0, 6.106), xytext=(2.2, 4.35),
             arrowprops=dict(arrowstyle="->", color="#DC2626", lw=1.3),
             fontsize=8.8, bbox=dict(boxstyle="round,pad=0.3", fc="#FEF2F2", ec="#DC2626", alpha=0.95)
@@ -437,7 +443,7 @@ def make_figure_2(data: dict, lang: str) -> None:
     )
     ax3.axhspan(6.08, 6.16, color="#10B981", alpha=0.35, label="Planck 2018 ($1\\sigma$)")
     ax3.axvline(U_GEN, color="#DC2626", lw=1.8, ls="--", label=(
-        r"$K_4$ Generator $u = \sqrt{3}/24 = 0.07217$" if lang == "en" else r"$K_4$ generátor $u = \sqrt{3}/24 = 0,07217$"
+        r"$K_4$ Generator $u = \sqrt{3}/24 = 0.07217$" if lang == "en" else r"$K_4$ generátor $u = \sqrt{3}/24 = 0{,}07217$"
     ))
     ax3.scatter([U_GEN], [6.1059], color="#DC2626", s=85, zorder=6)
 

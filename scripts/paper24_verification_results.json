@@ -1,7 +1,7 @@
 {
-  "verification_suite": "Starobinsky_K4_Seesaw_and_NonThermal_Leptogenesis_v1_1_0",
-  "version": "1.1.0",
-  "runtime_seconds": 5.7423,
+  "verification_suite": "Starobinsky_K4_Seesaw_and_NonThermal_Leptogenesis_v1_2_0",
+  "version": "1.2.0",
+  "runtime_seconds": 18.2734,
   "k_added_free_parameters": 0,
   "section_0_sympy_theorems": {
     "theorem_2_2_minimal_a2_nogo": {
@@ -10,13 +10,14 @@
       "minimal_xi0_scalar15_Delta_beta_R2": 0.010336129116556014,
       "minimal_xi0_spin10_210_Delta_beta_R2": 0.1447058076317842,
       "shortfall_factor_vs_minimal_210": 3343908808.7718005,
-      "massless_weyl_and_yang_mills_local_R2": 0.0
+      "weyl_and_yang_mills_local_R2_sympy_verified_zero": true
     },
     "theorem_3_1_scalaron_mass_and_composite_portal": {
       "exact_Minf_over_MPl_formula": "5 / (12288 * pi^3)",
       "exact_Minf_over_MPl_value": 1.312318295621724e-05,
       "sqrt3_irrational_cancellation_verified": true,
       "composite_portal_identity_verified": true,
+      "unit_weyl_vacuum_kinetic_normalization_verified": true,
       "plaquette_auxiliary_Legendre_exact": true,
       "cw_supertrace_d_A_minus_2d_S_at_N4": 2,
       "cw_supertrace_at_N3_tachyonic": -1,
@@ -34,10 +35,12 @@
   "section_1_inflation_and_decay_widths": {
     "scalaron_mass_M_inf_GeV": 31959191958318.297,
     "pivot_field_phi_star_over_MPl": 5.242236597668973,
+    "pivot_conformal_factor_Omega_sq_star": 72.25982171250178,
     "subplanckian_portal_Phi_star_over_Mstar": 0.2908797844716304,
     "subplanckian_portal_Phi_star_over_MPl": 0.16793952186651612,
     "sqrt_R_Jordan_pivot_GeV": 467281710900622.5,
     "ratio_sqrt_R_Jordan_over_M_R": 0.8396968320362435,
+    "plaquette_R3_over_R2_ratio_per_c3": 2.282575866495442e-16,
     "end_of_inflation_phi_over_MPl": 0.6146439942743064,
     "end_of_inflation_H_end_GeV": 7722556018867.46,
     "Gamma_phi_to_HH_GeV": 36.499174936022264,
@@ -69,11 +72,18 @@
     "strong_cp_theta_tree_exact": 0.0,
     "neutron_EDM_estimate_e_cm": 1e-31,
     "neutron_EDM_bound_e_cm": 1.8e-26,
+    "z2_cpt_table_group_identities_verified": true,
     "sin_theta_tau_3_over_8sqrt2": 0.2651650429449553,
     "theta_tau_rad": 0.2683750886143556,
-    "dirac_delta_CP_PMNS_deg": -90.0
+    "dirac_delta_CP_PMNS_deg": -90.0,
+    "jarlskog_invariant_J_PMNS": -0.03383317629196773,
+    "neutrinoless_2beta_m_bb_canonical_PMaj_I_meV": 1.4817210210040683,
+    "neutrinoless_2beta_m_bb_range_meV": [
+      1.4817210210040683,
+      3.7640679450040677
+    ]
   },
-  "section_3_unflavored_and_3flavor_boltzmann": {
+  "section_3_unflavored_and_flavored_boltzmann": {
     "M_1_GeV": 5696444235508.393,
     "M_2_GeV": 185496198577398.56,
     "casas_ibarra_complex_angle_z_tau": [
@@ -85,15 +95,18 @@
     "N_1_rest_decay_width_GeV": 513690533.23775893,
     "N_1_nonthermal_flight_width_GeV": 183121618.38846707,
     "peak_reheating_temperature_T_max_GeV": 2110445739576.1804,
+    "equality_temperature_T_eq_GeV": 3287019650.4447923,
+    "delta_N_star_4ODE_minus_instantaneous": -0.020908952426140104,
     "ratio_M1_over_Tmax": 2.699166402947821,
-    "final_Y_B_minus_L_unflavored": 2.447257230861003e-10,
-    "fractional_washout_percent": 0.05708321201057798,
+    "final_Y_B_minus_L_unflavored": 2.4472572308610065e-10,
+    "fractional_washout_percent": 0.05708313420619282,
     "analytic_instantaneous_Y_B_minus_L": 2.60717106782457e-10,
-    "non_instantaneous_entropy_factor_ODE_over_inst": 0.9386638495121842,
-    "eta_B_symmetric_sphaleron_28_79": 6.105880228136947e-10,
-    "eta_B_Planck2018_sigma_offset": -0.35299429657631615,
-    "eta_B_broken_crossover_12_37": 5.587234031152342e-10,
-    "three_flavor_boltzmann_check": {
+    "non_instantaneous_entropy_factor_ODE_over_inst": 0.9386638495121856,
+    "eta_B_symmetric_sphaleron_28_79": 6.105880228136956e-10,
+    "eta_B_Planck2018_sigma_offset": -0.3529942965760835,
+    "eta_B_broken_crossover_12_37": 5.58723403115235e-10,
+    "sympy_nardi_spectator_matrices_verified": true,
+    "flavored_boltzmann_check": {
       "eps_1_B_minus_L_flavors_e_mu_tau": [
         -1.6357169502996985e-05,
         7.973348741949286e-05,
@@ -104,43 +117,89 @@
         0.7739185660990934,
         0.03638356211746686
       ],
-      "y_bl_final_3flavor": 2.4484387713478276e-10,
-      "eta_B_sym_28_79_3flavor": 6.108828158826975e-10,
-      "relative_3flavor_shift_percent": 0.04828019187870236
+      "weinberg_DeltaL2_rowsum_weights_e_mu_tau": [
+        0.030844564648653323,
+        0.48457771767567387,
+        0.4845777176756738
+      ],
+      "max_majorana_phase_3flavor_spread_percent": 0.0066214957035989315,
+      "two_flavor_tau_perp_regime_1e9_to_1e11_GeV": {
+        "y_bl_final_2flavor": 2.4479296275658295e-10,
+        "eta_B_sym_28_79_2flavor": 6.107557850617205e-10,
+        "relative_2flavor_shift_percent": 0.02747552224358074
+      },
+      "three_flavor_e_mu_tau_regime_below_1e9_GeV": {
+        "y_bl_final_3flavor": 2.447938422351018e-10,
+        "eta_B_sym_28_79_3flavor": 6.10757979351079e-10,
+        "relative_3flavor_shift_percent": 0.02783489538498163
+      }
     },
     "sensitivity_check_ln_KT_rapidity": {
       "ln_1_plus_u": 0.06968349768855582,
       "signed_eps_1_ln_KT": 8.19109223941702e-05,
-      "eta_B_sym_28_79_ln_KT": 5.904478528713316e-10
+      "eta_B_sym_28_79_ln_KT": 5.90447852871333e-10
     }
   },
-  "section_4_spontaneous_baryogenesis_and_cpt": {
+  "section_4_higgs_xi_pinning_and_spontaneous_baryogenesis": {
+    "conformal_Higgs_xi_1_over_6_exclusion": {
+      "BR_phi_to_N1N1_at_conformal": 0.9325052726126115,
+      "eta_B_at_conformal": 5.2187328797739736e-09,
+      "Planck2018_sigma_overshoot": 1151.6832199434934
+    },
+    "two_sigma_xi_H_pinning_interval": [
+      -0.001841941518558745,
+      0.0025636467184906027
+    ],
     "weinberg_DeltaL2_decoupling_T_D_GeV": 7655424883862.067,
     "laboratory_CPT_bound_GeV": 1e-27,
     "non_minimal_Higgs_reheating_scan": [
       {
         "xi_H": 0.0,
-        "T_rh_GeV": 5096987248.839645,
+        "Gamma_phi_tot_GeV": 37.006258787917076,
+        "BR_phi_to_N1N1": 0.012777794379555637,
+        "T_rh_GeV": 5132271399.481489,
         "induced_Delta_N_star_at_fixed_Minf": 0.0,
-        "eta_B_at_c_theta_1": 7.974694738614049e-13,
-        "required_c_theta_for_Planck": 767.427494166832,
-        "present_day_CPT_shift_mu0_GeV": 3.3152867748007143e-39
+        "nonthermal_seesaw_eta_B": 6.105880228136956e-10,
+        "nonthermal_seesaw_Planck_sigma": -0.3529942965760835,
+        "spontaneous_baryog_eta_B_at_c_theta_1": 8.085446045117076e-13,
+        "required_c_theta_for_Planck": 756.9155697595633,
+        "present_day_CPT_shift_mu0_GeV": 3.269875261361313e-39
+      },
+      {
+        "xi_H": 0.16666666666666666,
+        "Gamma_phi_tot_GeV": 0.5070838518948158,
+        "BR_phi_to_N1N1": 0.9325052726126115,
+        "T_rh_GeV": 600775085.2871199,
+        "induced_Delta_N_star_at_fixed_Minf": -0.715027659247081,
+        "nonthermal_seesaw_eta_B": 5.2187328797739736e-09,
+        "nonthermal_seesaw_Planck_sigma": 1151.6832199434934,
+        "spontaneous_baryog_eta_B_at_c_theta_1": 1.108445154165544e-14,
+        "required_c_theta_for_Planck": 55212.474672301105,
+        "present_day_CPT_shift_mu0_GeV": 2.385178905843408e-37
       },
       {
         "xi_H": -5.0,
-        "T_rh_GeV": 158006604714.029,
-        "induced_Delta_N_star_at_fixed_Minf": 1.1446624014950486,
-        "eta_B_at_c_theta_1": 7.542218721501792e-10,
-        "required_c_theta_for_Planck": 0.8114323153414724,
-        "present_day_CPT_shift_mu0_GeV": 3.505387602275161e-42
+        "Gamma_phi_tot_GeV": 35076.214197369285,
+        "BR_phi_to_N1N1": 1.3480883737564034e-05,
+        "T_rh_GeV": 158007746847.9268,
+        "induced_Delta_N_star_at_fixed_Minf": 1.1423652444626953,
+        "nonthermal_seesaw_eta_B": 1.9570278562399173e-11,
+        "nonthermal_seesaw_Planck_sigma": -148.1074303594002,
+        "spontaneous_baryog_eta_B_at_c_theta_1": 7.542546176055836e-10,
+        "required_c_theta_for_Planck": 0.8113970875548928,
+        "present_day_CPT_shift_mu0_GeV": 3.505235418237137e-42
       },
       {
         "xi_H": -15.0,
-        "T_rh_GeV": 463825839644.4078,
-        "induced_Delta_N_star_at_fixed_Minf": 1.5036198355056165,
-        "eta_B_at_c_theta_1": 6.295948562603698e-09,
-        "required_c_theta_for_Planck": 0.09720536848650912,
-        "present_day_CPT_shift_mu0_GeV": 4.199271918617194e-43
+        "Gamma_phi_tot_GeV": 302250.1747290523,
+        "BR_phi_to_N1N1": 1.5644601892207843e-06,
+        "T_rh_GeV": 463826228724.2314,
+        "induced_Delta_N_star_at_fixed_Minf": 1.5013205486337098,
+        "nonthermal_seesaw_eta_B": 1.312015783904499e-10,
+        "nonthermal_seesaw_Planck_sigma": -120.19960540238752,
+        "spontaneous_baryog_eta_B_at_c_theta_1": 6.296526006551807e-09,
+        "required_c_theta_for_Planck": 0.0971964539435218,
+        "present_day_CPT_shift_mu0_GeV": 4.198886810360142e-43
       }
     ]
   }
