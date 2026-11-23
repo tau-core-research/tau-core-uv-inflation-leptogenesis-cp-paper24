@@ -17,22 +17,28 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{remark}[theorem]{Remark}
 
-\title{\textbf{Scale-Invariant Simplicial \texorpdfstring{$R^2$}{R2} Inflation, Multi-Sector \texorpdfstring{$CP$}{CP} Structure,\\
-and Zero-Parameter Non-Thermal Scalaron Leptogenesis\\
-from a Tetrahedral \texorpdfstring{$\mathrm{Spin}(10)$}{Spin(10)} Threshold}\\[0.35em]
-\large First-Principles Coleman--Weinberg Supertrace, \texorpdfstring{$\mathrm{SO}(2,\mathbb{C})$}{SO(2,C)} Casas--Ibarra Geometry, and Four-Experiment Falsification}
+\title{A Conditional Scalaron Inflation and Rank-Two Leptogenesis Benchmark}
 
 \author{\textbf{Jozsef Olcsak}\\
 \small Independent Researcher $\cdot$ ORCID: \href{https://orcid.org/0009-0003-7311-6522}{0009-0003-7311-6522}\\
 \small Email: \href{mailto:jolcsak@gmail.com}{jolcsak@gmail.com} $\cdot$ Code \& Data Archive: \href{https://doi.org/10.5281/zenodo.24380371}{doi:10.5281/zenodo.24380371}}
-\date{22 November 2026 (\texttt{v1.2.0})}
+\date{23 November 2026 (referee revision)}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-\noindent Joint models of Starobinsky $R^2$ inflation, Type-I seesaw neutrino masses, and post-inflationary leptogenesis typically introduce five to seven independent parameters ($M_{\mathrm{inf}}, M_1, M_2, \operatorname{Re}z, \operatorname{Im}z, \xi_H, \bar{\theta}_{\mathrm{QCD}}$). Here we test whether the entire ultraviolet-to-electroweak sequence is fixed without added free parameters ($k_{\mathrm{added}} = 0$) once the four-vertex tetrahedral simplicial-Clifford invariant $u = \sqrt{N-1}/N! = \sqrt{3}/24$ ($N=4$) and its chiral $\mathrm{Spin}(10)$ seesaw threshold $M_R = M_*/(256\pi^2) = 5.565\times 10^{14}\;\mathrm{GeV}$ ($M_* = M_{\mathrm{Pl}}/\sqrt{3}$) are specified. First, we prove two exact no-go theorems: (i) low-energy unit-timelike vector-director gravity rescales only the cosmological Newton constant on spatially flat FLRW backgrounds without generating slow-roll inflation; and (ii) minimally coupled 1-loop Schwinger--DeWitt $a_2(x)$ heat kernels contribute zero local $R^2$ for massless spin-$1/2$ and spin-$1$ fields and $\Delta\beta_{R^2} \le 0.145$ for $N_0 \le 210$ real scalars, falling short of the Starobinsky stiffness $\beta_{R^2}^{\mathrm{Star}} = 2^{22}\cdot 3\,\pi^6 / 25 = 4.839\times 10^8$ by $>3.34\times 10^9$. Second, we prove via computer algebra (\texttt{SymPy}) that the unitary-gauge composite auxiliary invariant $\sigma(\Phi) = (\Phi^\dagger\Phi - M_R^2)/(\sqrt{2}\,M_R)$ maps the plaquette portal $\mathcal{L}_{\mathrm{HS}} = \frac{1}{2}M_{\mathrm{Pl}}^2 R + \frac{1}{\sqrt{2}}M_*\sigma R - \frac{1}{2}m_\sigma^2\sigma^2$ identically onto a sub-Planckian non-minimal portal ($\Phi_* = 0.291\,M_* = 0.168\,M_{\mathrm{Pl}}$, cubic plaquette shift $|\Delta\mathcal{L}_{R^3}/\mathcal{L}_{R^2}|_* = 2.28\times 10^{-16}|c_3|$) and, upon auxiliary elimination, onto exact $\frac{1}{2}M_{\mathrm{Pl}}^2(R + R^2/6m_\sigma^2)$ with unit Weyl-induced vacuum kinetic weight $Z_{\mathrm{Weyl}}(0) = 3M_*^2/M_{\mathrm{Pl}}^2 \equiv 1$. Under Einstein-frame scale-invariant renormalization (\texttt{BC-UV-CW}, Prescription~I), the 1-loop Coleman--Weinberg supertrace between $d_A(N) = (N-1)^2 - 1$ real bosonic and $2d_S(N) = 2(N-1)$ real Majorana modes at $M_R$ is tachyonic ($-1$) at $N=3$ and uniquely positive ($8 - 6 = +2$) at $N=4$. The irrational $\sqrt{3}$ cancels identically in $M_{\mathrm{inf}}/M_{\mathrm{Pl}} = \frac{N+1}{32\pi^3 N! N^2}\big|_{N=4} = \frac{5}{12{,}288\pi^3}$ ($M_{\mathrm{inf}} = 3.196\times 10^{13}\;\mathrm{GeV}$), yielding at $\xi_H = 0$ ($N_* = 51.41$, $T_{\mathrm{rh}} = 5.13\times 10^9\;\mathrm{GeV}$) next-to-leading-order CMB observables $A_s = 2.101\times 10^{-9}$ ($+0.04\sigma$ vs.\ \texttt{Planck 2018}), $n_s = 0.9620$ ($-0.69\sigma$ vs.\ \texttt{Planck 2018}; companion Prescription~II no-go and kination ceiling $n_s \le 0.9729$ vs.\ \texttt{ACT DR6} discussed), and $r = 0.00426$. Third, while inflation dilutes pre-inflationary bounce baryon number by $e^{-3N_*}\simeq 10^{-67}$, scalaron decay opens kinematically solely into $\phi \to N_1 N_1$ ($\mathrm{BR} = 1.28\%$, $M_1 = 5.696\times 10^{12}\;\mathrm{GeV} < M_{\mathrm{inf}}/2 < M_2$). Cartan polar decomposition $\mathbf{R}(\theta_\tau + \mathrm{i} u) = \mathbf{O}(\theta_\tau)\mathbf{H}(u) \in \mathrm{SO}(2,\mathbb{C})$ fixes the signed $B-L$ asymmetry $\varepsilon_1^{(B-L)} = +8.4705\times 10^{-5} > 0$ (net matter sign without absolute-value ambiguity), giving $\eta_B = +6.106\times 10^{-10}$ ($-0.35\sigma$ vs.\ \texttt{Planck 2018}) in the energy-conserving 4-ODE system and $+6.108\times 10^{-10}$ ($+0.027\text{--}0.028\%$ shift) across both the 2-flavor $(\alpha_\perp,\tau)$ and 3-flavor $(e,\mu,\tau)$ chemical-potential spectator networks, while conformal SM Higgs coupling $\xi_H = 1/6$ overproduces $\eta_B = +52.19\times 10^{-10}$ ($+1{,}151.7\sigma$), pinning $\xi_H \in [-0.00184, +0.00256]$ ($2\sigma$), alongside tree-level $\bar{\theta}_{\mathrm{QCD}} = 0$ without axions.
+\noindent We examine a specified director, curvature-portal and rank-two seesaw benchmark. In the adopted homogeneous director sector there is no additional slow-roll source; the stated minimal matter-loop contribution is too small for the imposed Starobinsky stiffness. Auxiliary elimination in the specified portal yields an $R^2$ term. Under the stated mass normalization, subtraction prescription and reheating history the numerical benchmark gives $n_s=0.9620$, $r=0.00426$ and $\eta_B\simeq6.1\times10^{-10}$. The complex seesaw parameter is an input. Opposite choices of its imaginary part preserve the light-neutrino masses and mixings while reversing the unflavored decay source; therefore this does not predict the physical sign independently.
 \end{abstract}
+
+\paragraph{Publication audit (23 November 2026).}
+The Casas--Ibarra decomposition parametrizes a family of high-energy
+Yukawa matrices at fixed low-energy neutrino inputs. Its algebra does not
+select the complex angle or the sign of its imaginary part; the reported
+baryon asymmetry is conditional on the adopted chiral branch, UV boundary
+conditions and reheating prescription. A matched amplitude is only an
+independent test when it was not used to set the inflationary scale.
+
 
 \tableofcontents
 \vspace{0.4em}
@@ -107,7 +113,7 @@ Even for $N_0 = 15$ ($\Delta\beta_{R^2} = 0.0103$) or an entire $\mathrm{Spin}(1
 \end{theorem}
 
 % =============================================================================
-\section{First-Principles Starobinsky--\texorpdfstring{$K_4$}{K4} Scalaron Mass and NLO CMB Spectrum}
+\section{Conditional Starobinsky--\texorpdfstring{$K_4$}{K4} Scalaron Mass and NLO CMB Spectrum}
 \label{sec:inflation}
 % =============================================================================
 
@@ -236,7 +242,7 @@ $-3c_\theta H n_{B-L}$ (fixed $\langle A_0\rangle$) & $-3c_\theta H n_{B-L}$ & $
 \end{tabular}
 \end{table}
 
-\begin{theorem}[Cartan Polar Decomposition in \texorpdfstring{$\mathrm{SO}(2,\mathbb{C})$}{SO(2,C)} and Matter-Sign Selection]
+\begin{theorem}[Cartan Polar Decomposition in \texorpdfstring{$\mathrm{SO}(2,\mathbb{C})$}{SO(2,C)} and Conditional Asymmetry Sign]
 \label{thm:casas-ibarra}
 In rank-2 Type-I seesaw ($m_1 = 0$, $D_m = \operatorname{diag}(m_2, m_3)$, $D_M = \operatorname{diag}(M_1, M_2)$), the Dirac Yukawa matrix $Y_\nu = \frac{i}{v_H} U_{\mathrm{PMNS}} P_{3\times 2}\sqrt{D_m}\,\mathbf{R}^T(z_\tau)\sqrt{D_M}$ ($v_H = v_{\mathrm{EW}}/\sqrt{2} = 174.104\;\mathrm{GeV}$) is governed by $\mathbf{R}(z_\tau) = \exp(z_\tau\varepsilon_2) \in \mathrm{SO}(2,\mathbb{C})$ \cite{CasasIbarra2001,IbarraRoss2004} with $\varepsilon_2 = \bigl(\begin{smallmatrix}0 & 1\\ -1 & 0\end{smallmatrix}\bigr)$. Then (\texttt{SymPy}-verified):
 \begin{enumerate}[label=(\alph*),leftmargin=1.8em,itemsep=2pt]
@@ -251,11 +257,28 @@ In rank-2 Type-I seesaw ($m_1 = 0$, $D_m = \operatorname{diag}(m_2, m_3)$, $D_M 
 \varepsilon_1^{(B-L)} \equiv -\varepsilon_1^{(L)} = +\frac{1}{8\pi}\,\frac{M_2}{v_H^2}\,\frac{\operatorname{Im}(W_{12}^2)}{W_{11}}\,g_{\mathrm{loop}}(x) = \mathbf{+8.4705\times 10^{-5} > 0},
 \label{eq:eps1}
 \end{equation}
-guaranteeing \textbf{matter} dominance ($\eta_B > 0$) after electroweak sphaleron conversion!
+The sign stated here is conditional on the adopted orientation and one-loop, unflavored decay convention.
 \end{enumerate}
 \end{theorem}
 
 % =============================================================================
+\paragraph{A sign-reversed seesaw with the same light data.}
+Write $\eta=\operatorname{Im}z_\tau$ and hold $D_m,D_M,U_{\mathrm{PMNS}}$
+and $\theta_\tau$ fixed. Changing $\eta$ to $-\eta$ leaves the light
+mass matrix and the CP-even washout $W_{11}$ unchanged:
+\[
+ W_{11}=\tfrac12\big[(m_2+m_3)\cosh(2\eta)
+                     -(m_3-m_2)\cos(2\theta_\tau)\big].
+\]
+It conjugates $W$ and reverses $\operatorname{Im}(W_{12}^2)$.
+The asymmetry vanishes for $\eta=0$ or $\sin(2\theta_\tau)=0$;
+the same light data therefore admit either sign as well as zero.
+This counterexample concerns the summed, unflavored decay source,
+not a claim that arbitrary flavor-resolved observables agree.
+An operator norm supplies a magnitude, not an orientation. The
+chosen sign and reheating history are inputs to the benchmark,
+not selected by the Casas--Ibarra parametrization.
+
 \section{Energy-Conserving Flavored Boltzmann Reheating and Non-Minimal Higgs Pinning}
 \label{sec:boltzmann}
 % =============================================================================
@@ -287,6 +310,12 @@ Stiff Radau integration of Eqs.~\eqref{eq:boltz-phi}--\eqref{eq:boltz-bl} (Figur
 while $\eta_{\mathrm{CP}} = \ln(1 + u)$ gives $+5.904\times 10^{-10}$ ($-3.5\%$). Finally, varying the non-minimal SM Higgs coupling $-\xi_H R|H|^2$ scales $\Gamma(\phi \to HH) = (1 - 6\xi_H)^2\Gamma_{HH}^{(0)}$ while leaving $\Gamma_{VV}$ and $\Gamma_{N_1 N_1}$ invariant: at conformal coupling $\xi_H = 1/6$ \cite{GorbunovTokareva2013}, $\Gamma_{HH}$ vanishes, boosting $\mathrm{BR}(\phi \to N_1 N_1)$ to $\mathbf{93.25\%}$ and overproducing $\eta_B = \mathbf{+52.19\times 10^{-10}}$ (\textbf{excluded at $+1{,}151.7\sigma$}), so \texttt{Planck}'s $\eta_B = (6.12 \pm 0.04)\times 10^{-10}$ pins $\xi_H \in \mathbf{[-0.00184,\; +0.00256]}$ at $2\sigma$ ($|\Delta n_s| < 4\times 10^{-6}$). Conversely, large negative $\xi_H \in [-15, -5]$ activate spontaneous baryogenesis ($c_\theta \in [0.10, 0.81]$) only at the cost of suppressing $\phi \to N_1 N_1$ yields ($\eta_B \in [0.20, 1.31]\times 10^{-10}$, $>120\sigma$ deficit) and raising $N_*$ by $+1.14\text{--}1.50$ e-folds ($+3\text{--}4\sigma$ $A_s$ overshoot), confirming $\xi_H = 0$ as the unique self-consistent minimal branch.
 
 % =============================================================================
+\paragraph{Scope of the supertrace.}
+For the specified counting rule, $d_A-2d_S=N^2-4N+2$; for example
+it is $+7$ at $N=5$. Its sign distinguishes the displayed $N=3$
+and $N=4$ benchmarks but does not uniquely select $N=4$ among all
+integers or fix the physical renormalization prescription.
+
 \section{Joint Four-Experiment Falsification Matrix and Conclusion}
 \label{sec:conclusion}
 % =============================================================================
@@ -299,7 +328,7 @@ while $\eta_{\mathrm{CP}} = \ln(1 + u)$ gives $+5.904\times 10^{-10}$ ($-3.5\%$)
 \footnotesize
 \begin{tabularx}{\textwidth}{ll>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
 \toprule
-Gate & Target Experiments & Locked Prediction ($k_{\mathrm{added}} = 0$) & Decisive Falsification Threshold \\
+Gate & Target Experiments & Conditional benchmark & Proposed rejection criterion \\
 \midrule
 \textbf{F1 (CMB $B$-Modes)} & \texttt{LiteBIRD} \cite{LiteBIRD2023}, \texttt{CMB-S4}, \texttt{SO} & $r = 0.00426$, $n_s = 0.9620$ (Presc.~I) & Falsified if $r > 0.012$ or $r < 0.0015$ ($\ge 5\sigma$), or $|\alpha_s| > 0.015$. \\
 \textbf{F2 (Leptonic $CP$)} & \texttt{DUNE}, \texttt{Hyper-Kamiokande} & Normal Ordering ($m_1 = 0$), $\delta_{\mathrm{CP}}^{\mathrm{PMNS}} \approx -90^\circ$ & Falsified if Inverted Ordering holds or $\sin\delta_{\mathrm{CP}}^{\mathrm{PMNS}} > 0$ at $\ge 5\sigma$. \\
